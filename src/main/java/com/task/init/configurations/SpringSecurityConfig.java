@@ -3,7 +3,7 @@ package com.task.init.configurations;
 
 import com.task.init.filters.CustomAuthenticationFilter;
 import com.task.init.filters.CustomAuthorizationFilter;
-import com.task.init.services.CustomUserDetailsService;
+import com.task.init.services.AuthenticationUserDetailsService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,9 +19,9 @@ import static org.springframework.http.HttpMethod.*;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomUserDetailsService userDetailsService;
+    private final AuthenticationUserDetailsService userDetailsService;
 
-    public SpringSecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SpringSecurityConfig(AuthenticationUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

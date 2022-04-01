@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.task.init.models.dtos.CustomUserDetails;
-import com.task.init.services.CustomUserDetailsService;
+import com.task.init.services.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,19 +25,19 @@ import java.util.stream.Collectors;
 
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private final CustomUserDetailsService customUserDetailsService;
+    private final AuthenticationUserDetailsService authenticationUserDetailsService;
     @Value("${apiKey}")
     private String apiSecret;
 
-    public CustomAuthenticationFilter(CustomUserDetailsService customUserDetailsService) {
-        this.customUserDetailsService = customUserDetailsService;
+    public CustomAuthenticationFilter(AuthenticationUserDetailsService authenticationUserDetailsService) {
+        this.authenticationUserDetailsService = authenticationUserDetailsService;
     }
 
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("name");
-        UserDetails user = customUserDetailsService.loadUserByUsername(username);
+        UserDetails user = authenticationUserDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
     }
 

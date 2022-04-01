@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("CustomUserDetailsService")
-public class CustomUserDetailsService implements UserDetailsService {
+public class AuthenticationUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public AuthenticationUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
